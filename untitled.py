@@ -10,7 +10,6 @@ regex = re.compile(
 df2 = pd.read_csv('Table-25-2018-19.csv',header=14)
 
 array = df2['Salary band'].unique()
-print(array)
 dict1 = {}
 for item in array:
     dict1[item] = regex.findall(item)
