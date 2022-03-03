@@ -1,6 +1,4 @@
-
 import pandas as pd
-
 filters = {
     "Happy": {
         "Sky Color" : ["blue"],
@@ -18,16 +16,19 @@ filters = {
         "Weather" : ["Overcast"]
     }
 }
-
-
 df = pd.DataFrame.from_dict({
     "Sky Color" : ["blue","blue","Red","Grey","blue"],
     "Time Of Day" : ["Noon","Noon","Night","Twilight","Twilight"],
     "Weather" : ["Clear","Thunder","Thunder","Overcast","Clear"]
     })
 
+for row in df.itertuples():
+    for key in filters:
+        for i, filt in enumerate(filters[key]):
+            if row[i+1] not in filters[key][filt]:
+                break
+        else:
+            df.at[row.Index, "Type of Day"] = key
 
-# so far I have tried things like this
-for item in filters.keys():
-    df.loc[(df[filters[item].keys()].isin(filters[item].values()).all(axis=1)),'Type of Day'] = item
-
+df["Type of Day"] = df["Type of Day"].fillna("")
+print(df)
