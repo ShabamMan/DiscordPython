@@ -31,7 +31,3 @@ df = pd.DataFrame.from_dict({
 for item in filters.keys():
     df.loc[(df[filters[item].keys()].isin(filters[item].values()).all(axis=1)),'Type of Day'] = item
 
-
-
-
-df.to_csv("C:\\Users\\mrber\\Desktop\\test.csv")
